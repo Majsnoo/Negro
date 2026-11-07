@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Para mi negro ❤️</title>
+  <meta name="description" content="Una página hecha con todo mi amor para mi negro.">
+  <meta name="theme-color" content="#05010a">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+
+  <!-- Open Graph: vista previa al compartir el enlace -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Para mi negro ❤️">
+  <meta property="og:description" content="Te sigo amando.">
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Inter:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Sin JavaScript: mostrar todo de inmediato -->
+  <noscript>
+    <style>
+      .stage *{animation-play-state:running !important}
+      [data-split]{visibility:visible !important}
+      .curtain{display:none}
+    </style>
+  </noscript>
+</head>
+
+<body>
+  <!-- Sprite: forma del corazón definida una sola vez y reutilizada con <use> -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="heart-path" pathLength="100"
+            d="M50 88 C50 88 6 61 6 33 C6 17 19 8 31 8 C40 8 47 13 50 20 C53 13 60 8 69 8 C81 8 94 17 94 33 C94 61 50 88 50 88 Z"/>
+    </defs>
+  </svg>
+
+  <!-- Capas de fondo -->
+  <div class="aurora" aria-hidden="true"><span></span><span></span></div>
+  <canvas id="sky" class="layer layer--sky" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Mariposas (generadas por butterflies.js) -->
+  <div class="butterflies" id="butterflies" aria-hidden="true"></div>
+
+  <!-- Contenido -->
+  <main class="stage">
+    <h1 class="visually-hidden">Para mi negro, con todo mi amor</h1>
+
+    <button class="heart-button" id="heartButton" type="button" aria-label="Enviar una lluvia de corazones">
+      <span class="heart-float">
+        <span class="heart-rings" aria-hidden="true">
+          <svg class="ring" viewBox="0 0 100 92"><use href="#heart-path"/></svg>
+          <svg class="ring" viewBox="0 0 100 92"><use href="#heart-path"/></svg>
+        </span>
+
+        <span class="heart-pop">
+          <span class="heart-beat">
+            <span class="heart-halo" aria-hidden="true"></span>
+
+            <svg class="heart" viewBox="0 0 100 92" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="heart-gradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%"   stop-color="#ffc2dd"/>
+                  <stop offset="40%"  stop-color="#ff6fb5"/>
+                  <stop offset="75%"  stop-color="#ff2e88"/>
+                  <stop offset="100%" stop-color="#c2185b"/>
+                </linearGradient>
+                <radialGradient id="heart-depth" cx="50%" cy="35%" r="70%">
+                  <stop offset="55%"  stop-color="#5a002d" stop-opacity="0"/>
+                  <stop offset="100%" stop-color="#5a002d" stop-opacity=".45"/>
+                </radialGradient>
+                <radialGradient id="heart-shine-gradient">
+                  <stop offset="0%"   stop-color="#fff" stop-opacity=".75"/>
+                  <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+                </radialGradient>
+                <clipPath id="heart-clip"><use href="#heart-path"/></clipPath>
+              </defs>
+
+              <g class="heart-body">
+                <use href="#heart-path" fill="url(#heart-gradient)"/>
+                <use href="#heart-path" fill="url(#heart-depth)"/>
+                <g clip-path="url(#heart-clip)">
+                  <ellipse cx="30" cy="26" rx="16" ry="8" transform="rotate(-35 30 26)" fill="url(#heart-shine-gradient)"/>
+                </g>
+              </g>
+
+              <use class="heart-outline" href="#heart-path"/>
+
+              <!-- Destellos sobre el corazón -->
+              <path class="glint glint--1" d="M26 18 Q26 24 32 24 Q26 24 26 30 Q26 24 20 24 Q26 24 26 18 Z"/>
+              <path class="glint glint--2" d="M74 17 Q74 21 78 21 Q74 21 74 25 Q74 21 70 21 Q74 21 74 17 Z"/>
+            </svg>
+
+            <span class="name" data-split>Daniel</span>
+          </span>
+        </span>
+      </span>
+    </button>
+
+    <p class="message">
+      <span class="message-text" data-split>Te sigo amando</span>
+      <svg class="message-heart" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><use href="#heart-path"/></svg>
+    </p>
+
+    <p class="phrase" id="phrase"></p>
+
+    <p class="hint">Toca el corazón o cualquier lugar ✨</p>
+  </main>
+
+  <!-- Capa de partículas interactivas (encima del contenido, no bloquea clics) -->
+  <canvas id="fx" class="layer layer--fx" aria-hidden="true"></canvas>
+
+  <!-- Telón de entrada -->
+  <div class="curtain" aria-hidden="true"></div>
+
+  <script src="js/utils.js" defer></script>
+  <script src="js/sky.js" defer></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/butterflies.js" defer></script>
+  <script src="js/intro.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
